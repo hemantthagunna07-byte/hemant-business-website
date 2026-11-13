@@ -1,0 +1,740 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<meta name="description" content="VANTAGE — Digital books, AI guides and resources for personal growth.">
+<title>VANTAGE — Elevate Your Thinking</title>
+
+<style>
+:root {
+  --bg:#090909;
+  --surface:#141414;
+  --white:#f5f5f5;
+  --muted:#999;
+  --line:#292929;
+  --accent:#c9b995;
+}
+* {box-sizing:border-box;margin:0;padding:0}
+html {scroll-behavior:smooth}
+body {
+  background:var(--bg);
+  color:var(--white);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.6;
+}
+a {color:inherit;text-decoration:none}
+button {font:inherit;cursor:pointer}
+.container {width:min(1100px,90%);margin:auto}
+
+header {
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(9,9,9,.95);
+  backdrop-filter:blur(12px);
+}
+.nav {
+  min-height:72px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo {
+  font-size:23px;
+  font-weight:900;
+  letter-spacing:7px;
+}
+.nav-links {
+  display:flex;
+  gap:25px;
+  align-items:center;
+}
+.nav-links a {color:#bbb;font-size:13px}
+.nav-links a:hover {color:white}
+.cart-button {
+  background:white;
+  color:black;
+  border:none;
+  border-radius:30px;
+  padding:9px 17px;
+  font-weight:bold;
+}
+
+.hero {
+  padding:100px 0 90px;
+  text-align:center;
+  background:radial-gradient(ellipse at 50% 0%,#28231a 0%,transparent 60%);
+}
+.eyebrow {
+  color:var(--accent);
+  font-size:11px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+}
+.hero h1 {
+  font-size:clamp(48px,10vw,94px);
+  line-height:1.05;
+  letter-spacing:8px;
+  margin:24px 0;
+  font-weight:900;
+}
+.hero h1 span {color:var(--accent)}
+.hero p {
+  max-width:530px;
+  margin:auto;
+  color:#aaa;
+  font-size:16px;
+}
+.primary-btn {
+  display:inline-block;
+  margin-top:32px;
+  background:var(--white);
+  color:#090909;
+  padding:14px 27px;
+  border-radius:3px;
+  font-weight:bold;
+  font-size:13px;
+  border:1px solid white;
+}
+.primary-btn:hover {
+  background:var(--accent);
+  border-color:var(--accent);
+}
+
+.section {padding:75px 0}
+.section-heading {
+  text-align:center;
+  margin-bottom:38px;
+}
+.section-heading h2 {font-size:32px;margin:10px 0}
+.section-heading p {color:var(--muted);font-size:14px}
+
+.products {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.product {
+  background:var(--surface);
+  border:1px solid var(--line);
+  overflow:hidden;
+  transition:.25s;
+}
+.product:hover {
+  transform:translateY(-5px);
+  border-color:#777;
+}
+.cover {
+  min-height:220px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  text-align:center;
+  background:linear-gradient(145deg,#292929,#101010);
+}
+.cover small {
+  letter-spacing:4px;
+  color:var(--accent);
+  font-size:9px;
+}
+.cover strong {
+  font-size:27px;
+  line-height:1.2;
+  margin:18px 0;
+  letter-spacing:2px;
+}
+.cover span {
+  color:#aaa;
+  font-size:10px;
+  letter-spacing:2px;
+}
+.product-info {padding:20px}
+.product-info h3 {font-size:17px;margin-bottom:7px}
+.product-info p {
+  color:var(--muted);
+  font-size:13px;
+  min-height:42px;
+}
+.price-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:17px;
+  gap:8px;
+}
+.price {font-size:19px;font-weight:bold}
+.add-btn {
+  background:white;
+  color:black;
+  border:none;
+  padding:10px 15px;
+  font-size:12px;
+  font-weight:bold;
+  border-radius:3px;
+}
+
+.about {
+  background:#111;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  text-align:center;
+}
+.about-content {max-width:680px;margin:auto}
+.about h2 {font-size:32px;margin:15px 0}
+.about p {color:#aaa;font-size:15px}
+
+.features {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.feature {
+  padding:25px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  text-align:center;
+}
+.feature h3 {margin:10px 0;font-size:16px}
+.feature p {color:var(--muted);font-size:13px}
+.feature .symbol {color:var(--accent);font-size:27px}
+
+.payment-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+.payment {
+  padding:24px;
+  background:var(--surface);
+  border:1px solid var(--line);
+}
+.payment h3 {font-size:21px}
+.payment p {color:var(--muted);font-size:13px}
+.payment small {color:var(--accent)}
+
+.contact {text-align:center}
+.contact p {color:var(--muted);margin-top:8px}
+
+footer {
+  padding:30px 0;
+  border-top:1px solid var(--line);
+  text-align:center;
+  color:#777;
+  font-size:12px;
+}
+footer strong {color:white;letter-spacing:4px}
+
+.cart-panel {
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:30;
+  background:rgba(0,0,0,.8);
+  justify-content:flex-end;
+}
+.cart-panel.open {display:flex}
+.cart-content {
+  width:min(420px,100%);
+  height:100%;
+  overflow-y:auto;
+  padding:25px;
+  background:#111;
+  border-left:1px solid var(--line);
+}
+.cart-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+.close-btn {
+  background:none;
+  color:white;
+  border:1px solid #555;
+  padding:5px 12px;
+}
+.cart-item {
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+.cart-item button {
+  background:none;
+  color:#e99;
+  border:none;
+}
+.cart-total {
+  padding:20px 0;
+  display:flex;
+  justify-content:space-between;
+  font-weight:bold;
+}
+.checkout-btn {
+  width:100%;
+  padding:14px;
+  background:white;
+  color:black;
+  border:none;
+  font-weight:bold;
+}
+.empty {color:var(--muted);font-size:14px}
+
+#checkout {
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:40;
+  background:rgba(0,0,0,.9);
+  overflow-y:auto;
+  padding:20px;
+}
+.checkout-box {
+  max-width:450px;
+  margin:35px auto;
+  padding:25px;
+  background:#171717;
+  border:1px solid #444;
+}
+.checkout-box h2 {margin-bottom:18px}
+.checkout-box label {
+  display:block;
+  color:#bbb;
+  font-size:13px;
+  margin:15px 0 6px;
+}
+.checkout-box input,
+.checkout-box select {
+  width:100%;
+  padding:13px;
+  background:#090909;
+  border:1px solid #444;
+  color:white;
+  border-radius:3px;
+}
+.payment-note {
+  color:var(--muted);
+  font-size:12px;
+  margin:15px 0;
+}
+.form-buttons {
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+.form-buttons button {
+  flex:1;
+  padding:13px 5px;
+  border:none;
+}
+.submit-btn {
+  background:white;
+  color:black;
+  font-weight:bold;
+}
+.cancel-btn {background:#333;color:white}
+
+@media(max-width:700px) {
+  .nav-links {gap:12px}
+  .nav-links a {font-size:11px}
+  .logo {font-size:19px;letter-spacing:4px}
+  .products {grid-template-columns:repeat(2,1fr);gap:12px}
+  .product-info {padding:13px}
+  .cover {min-height:180px}
+  .cover strong {font-size:20px}
+  .features {grid-template-columns:1fr}
+  .section {padding:55px 0}
+}
+@media(max-width:390px) {
+  .products {grid-template-columns:1fr}
+  .nav-links {gap:8px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#" class="logo">VANTAGE</a>
+    <nav class="nav-links">
+      <a href="#products">Shop</a>
+      <a href="#about">About</a>
+      <a href="#payments">Payments</a>
+      <a href="#contact">Contact</a>
+      <button class="cart-button" onclick="openCart()">
+        Cart (<span id="cart-count">0</span>)
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow">Knowledge is an advantage</div>
+    <h1>YOUR NEXT<br><span>LEVEL.</span></h1>
+    <p>
+      Upgrade your mindset. Master new skills.
+      Discover digital resources designed to help
+      you think better, work smarter and grow further.
+    </p>
+    <a href="#products" class="primary-btn">
+      EXPLORE THE COLLECTION →
+    </a>
+  </div>
+</section>
+
+<section class="section" id="products">
+  <div class="container">
+    <div class="section-heading">
+      <div class="eyebrow">The digital collection</div>
+      <h2>Explore Our Products</h2>
+      <p>Knowledge, delivered digitally.</p>
+    </div>
+    <div class="products" id="product-list"></div>
+  </div>
+</section>
+
+<section class="section about" id="about">
+  <div class="container about-content">
+    <div class="eyebrow">Our philosophy</div>
+    <h2>Built for the ambitious.</h2>
+    <p>
+      VANTAGE is a digital knowledge brand focused on
+      self-improvement, artificial intelligence,
+      productivity and personal development.
+      Our mission is to make useful knowledge
+      accessible to people who want to keep growing.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <div class="eyebrow">The VANTAGE standard</div>
+      <h2>Why VANTAGE?</h2>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <div class="symbol">✦</div>
+        <h3>Digital Access</h3>
+        <p>Digital resources delivered after order confirmation.</p>
+      </div>
+      <div class="feature">
+        <div class="symbol">◈</div>
+        <h3>Practical Knowledge</h3>
+        <p>Resources designed around useful ideas and skills.</p>
+      </div>
+      <div class="feature">
+        <div class="symbol">◎</div>
+        <h3>Continuous Growth</h3>
+        <p>Keep learning, experimenting and improving.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="payments">
+  <div class="container">
+    <div class="section-heading">
+      <div class="eyebrow">Payments</div>
+      <h2>Simple local payments.</h2>
+      <p>Choose your preferred payment method when ordering.</p>
+    </div>
+    <div class="payment-grid">
+      <div class="payment">
+        <h3>eSewa</h3>
+        <p>Digital wallet payment in Nepal.</p>
+        <small>Merchant integration required</small>
+      </div>
+      <div class="payment">
+        <h3>Khalti</h3>
+        <p>Digital wallet payment in Nepal.</p>
+        <small>Merchant integration required</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="eyebrow">Get in touch</div>
+    <h2>Have a question?</h2>
+    <p>Contact VANTAGE for product information and orders.</p>
+    <a href="https://wa.me/9779828612442"
+       class="primary-btn" target="_blank" rel="noopener">
+       CONTACT US ON WHATSAPP
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <strong>VANTAGE</strong>
+    <p>Elevate your thinking. © <span id="year"></span> VANTAGE.</p>
+  </div>
+</footer>
+
+<!-- Shopping cart -->
+<div class="cart-panel" id="cart-panel">
+  <div class="cart-content">
+    <div class="cart-head">
+      <h2>Your Cart</h2>
+      <button class="close-btn" onclick="closeCart()">Close ✕</button>
+    </div>
+    <div id="cart-items"></div>
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cart-total">NPR 0</span>
+    </div>
+    <button class="checkout-btn" onclick="openCheckout()">
+      CONTINUE TO ORDER
+    </button>
+  </div>
+</div>
+
+<!-- Checkout form -->
+<div id="checkout">
+  <div class="checkout-box">
+    <h2>Complete Your Order</h2>
+    <form id="order-form">
+
+      <label for="customer">Your name</label>
+      <input id="customer" required placeholder="Enter your name">
+
+      <label for="phone">Phone number</label>
+      <input id="phone" type="tel" required
+        placeholder="98XXXXXXXX">
+
+      <label for="payment">Preferred payment method</label>
+      <select id="payment" required>
+        <option value="">Select payment method</option>
+        <option value="eSewa">eSewa</option>
+        <option value="Khalti">Khalti</option>
+      </select>
+
+      <p class="payment-note">
+        This is an order request, not an online payment.
+        VANTAGE will confirm your order and provide
+        verified payment instructions. Do not send money
+        until you have confirmed the payment details.
+      </p>
+
+      <div class="form-buttons">
+        <button type="submit" class="submit-btn">
+          REQUEST ORDER
+        </button>
+        <button type="button" class="cancel-btn"
+          onclick="closeCheckout()">Cancel</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<script>
+
+// VANTAGE BUSINESS WHATSAPP NUMBER
+const WHATSAPP_NUMBER = "9779828612442";
+
+// SAMPLE DIGITAL PRODUCTS
+// Replace sample products with your real ebooks.
+
+const products = [
+  {
+    id:1,
+    name:"The Discipline Code",
+    description:"A practical guide to habits, consistency and self-discipline.",
+    price:299,
+    cover:"DISCIPLINE<br>CODE"
+  },
+  {
+    id:2,
+    name:"AI Productivity Guide",
+    description:"Learn practical ways to use AI in your everyday workflow.",
+    price:399,
+    cover:"MASTER<br>AI"
+  },
+  {
+    id:3,
+    name:"The Growth Mindset",
+    description:"Explore mindset, learning and personal development.",
+    price:249,
+    cover:"GROWTH<br>MINDSET"
+  },
+  {
+    id:4,
+    name:"Focus & Deep Work",
+    description:"Ideas and exercises for improving focus and productivity.",
+    price:299,
+    cover:"DEEP<br>WORK"
+  },
+  {
+    id:5,
+    name:"Personal Finance Basics",
+    description:"A beginner-friendly introduction to money management.",
+    price:349,
+    cover:"SMART<br>FINANCE"
+  },
+  {
+    id:6,
+    name:"The AI Toolkit",
+    description:"An introduction to useful AI tools and workflows.",
+    price:299,
+    cover:"AI<br>TOOLKIT"
+  }
+];
+
+let cart = [];
+
+const formatPrice = amount =>
+  "NPR " + amount.toLocaleString("en-IN");
+
+function renderProducts() {
+  document.getElementById("product-list").innerHTML =
+    products.map(product => `
+      <article class="product">
+        <div class="cover">
+          <small>VANTAGE / DIGITAL EDITION</small>
+          <strong>${product.cover}</strong>
+          <span>KNOWLEDGE • GROWTH • ACTION</span>
+        </div>
+        <div class="product-info">
+          <h3>${product.name}</h3>
+          <p>${product.description}</p>
+          <div class="price-row">
+            <span class="price">${formatPrice(product.price)}</span>
+            <button class="add-btn"
+              onclick="addToCart(${product.id})">
+              ADD +
+            </button>
+          </div>
+        </div>
+      </article>
+    `).join("");
+}
+
+function addToCart(id) {
+  const item = cart.find(p => p.id === id);
+
+  if (item) {
+    item.quantity++;
+  } else {
+    cart.push({
+      ...products.find(p => p.id === id),
+      quantity:1
+    });
+  }
+
+  updateCart();
+}
+
+function updateCart() {
+  const count = cart.reduce((sum,p) => sum+p.quantity,0);
+  const total = cart.reduce((sum,p) => sum+p.price*p.quantity,0);
+
+  document.getElementById("cart-count").textContent = count;
+  document.getElementById("cart-total").textContent = formatPrice(total);
+
+  document.getElementById("cart-items").innerHTML =
+    cart.length ? cart.map(p => `
+      <div class="cart-item">
+        <div>
+          <strong>${p.name}</strong>
+          <p>${p.quantity} × ${formatPrice(p.price)}</p>
+        </div>
+        <button onclick="removeItem(${p.id})">Remove</button>
+      </div>
+    `).join("") :
+    '<p class="empty">Your cart is empty.</p>';
+}
+
+function removeItem(id) {
+  cart = cart.filter(p => p.id !== id);
+  updateCart();
+}
+
+function openCart() {
+  document.getElementById("cart-panel").classList.add("open");
+}
+
+function closeCart() {
+  document.getElementById("cart-panel").classList.remove("open");
+}
+
+function openCheckout() {
+  if (!cart.length) {
+    alert("Your cart is empty. Add a product first.");
+    return;
+  }
+
+  closeCart();
+  document.getElementById("checkout").style.display = "block";
+}
+
+function closeCheckout() {
+  document.getElementById("checkout").style.display = "none";
+}
+
+document.getElementById("order-form").addEventListener("submit",function(e) {
+  e.preventDefault();
+
+  if (!cart.length) {
+    alert("Your cart is empty.");
+    return;
+  }
+
+  const name = document.getElementById("customer").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const payment = document.getElementById("payment").value;
+
+  const total = cart.reduce(
+    (sum,p) => sum+p.price*p.quantity,0
+  );
+
+  const order = cart.map(p =>
+    `${p.name} x ${p.quantity} = ${formatPrice(p.price*p.quantity)}`
+  ).join("\n");
+
+  const message =
+`VANTAGE ORDER REQUEST
+
+Name: ${name}
+Phone: ${phone}
+
+Products:
+${order}
+
+Total: ${formatPrice(total)}
+Preferred payment: ${payment}
+
+Please confirm my order and share official payment instructions.`;
+
+  const url = "https://wa.me/" + WHATSAPP_NUMBER +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(url,"_blank");
+});
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+renderProducts();
+updateCart();
+
+</script>
+</body>
+  </html>
+        
